@@ -1,0 +1,13 @@
+body {
+  display: flex;
+}
+
+#board {
+  position: absolute;
+  z-index: 0;
+} 
+
+#checkers {
+  position: absolute;
+  z-index: 1;
+}
