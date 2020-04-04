@@ -1,9 +1,9 @@
 // Холст доски.
-const canvasBoard = document.querySelector(`#board`);
-const ctxB = canvasBoard.getContext(`2d`);
+const canvasBoard: HTMLCanvasElement = document.querySelector(`#board`);
+const ctxB: CanvasRenderingContext2D = canvasBoard.getContext(`2d`);
 // Холст шашек.
-const canvasCheckers = document.querySelector(`#checkers`);
-const ctxC = canvasCheckers.getContext(`2d`);
+const canvasCheckers: HTMLCanvasElement = document.querySelector(`#checkers`);
+const ctxC: CanvasRenderingContext2D = canvasCheckers.getContext(`2d`);
 
 // Изначальные параметры:
 //------------------------------------------------- Переменные <-ctxB->
@@ -21,6 +21,7 @@ const SQUARE_COLOR = { // Цвета клеток.
   FIRST: `rgb(234,206,166)`,
   SECOND: `rgb(134,100,61)`,
 };
+
 //------------------------------------------------- Переменные <-ctxC->
 // Параметры шашки.
 const CHECKERS_LINE = 3; // Сколько рядов шашек будет у каждого игрока.
@@ -45,11 +46,12 @@ const OBJECTS = { // Список всех объектов для отрисо�
   CHECKERS: [], // Список всех шашек
   SELECTED: null,
 };
+
 //------------------------------------------------- Логика <-ctxB->
 // Рабочие переменные:
-let colorTriger = true; // Тригер на смену цвета клетки что бы была очередность.
+let colorTriger: boolean = true; // Тригер на смену цвета клетки что бы была очередность.
 
-const renderSquare = (x, y) => { // Рендер клетки.
+const renderSquare = (x, y): void => { // Рендер клетки.
   if (colorTriger) {
     ctxB.fillStyle = SQUARE_COLOR.FIRST; // указываем цвет
     ctxB.fillRect (x, y, SQUARE_SIZE.WIDTH, SQUARE_SIZE.HEIGHT); // заливаем выбранную область
@@ -63,7 +65,11 @@ const renderSquare = (x, y) => { // Рендер клетки.
   }
 };
 
-const renderSquares = () => { // Рендер всех клеток.
+/**
+ * Рендерит все клетки на холсте.
+ * @function
+ */
+const renderSquares = (): void => { // Рендер всех клеток.
   let cordinateX = 0;
   let cordinateY = 0;
 
@@ -149,6 +155,23 @@ const getCheckers = (startX, startY) => {
   }
 };
 
+//------------------------------------------------- Вспомогательные функции.
+/**
+ * Преобразовывает кординаты миши относительно canvas.
+ * @function
+ * @param {HTMLCanvasElement} canvas - Элемент канваса.
+ * @param {number} x - Кординаты миши относительно window.
+ * @param {number} y - Кординаты миши относительно window.
+ * @return {Object}
+ */
+const windowToCanvas = (canvas: HTMLCanvasElement, x: number, y: number) => {
+  const bbox = canvas.getBoundingClientRect();
+  return { 
+    x: x - bbox.left * (canvas.width / bbox.width),
+    y: y - bbox.top * (canvas.height / bbox.height),
+  };
+};
+
 //------------------------------------------------- Логика <-ctxB-ctxC>
 const renderBoard = (x = 50, y = 50) => { // Рендер всей доски.
   renderSquares(); // рендер клеток
@@ -168,18 +191,7 @@ const renderBoard = (x = 50, y = 50) => { // Рендер всей доски.
 };
 
 // ТЕСТ
-const img = document.querySelector(`#source`);
-renderBoard();
-
-
-
-const windowToCanvas = (canvas, x, y) => {
-  const bbox = canvas.getBoundingClientRect();
-  return { 
-    x: x - bbox.left * (canvas.width / bbox.width),
-    y: y - bbox.top * (canvas.height / bbox.height),
-  };
-};
+const img: SVGImageElement = document.querySelector(`#source`);
 
 document.addEventListener(`mousedown`, (evt) => {
   const cor = windowToCanvas(canvasBoard, evt.clientX, evt.clientY);
@@ -218,3 +230,10 @@ document.addEventListener(`mousedown`, (evt) => {
 //   document.addEventListener('mousemove', oneMouseMove);
 //   document.addEventListener('mouseup', oneMouseUp);
 // });
+
+
+const init = (): void => {
+  renderSquares();
+};
+
+init();
