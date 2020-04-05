@@ -6,46 +6,46 @@ const canvasCheckers: HTMLCanvasElement = document.querySelector(`#checkers`);
 const ctxC: CanvasRenderingContext2D = canvasCheckers.getContext(`2d`);
 
 // Изначальные параметры:
-//------------------------------------------------- Переменные <-ctxB->
-// Параметры доски.
-const BOARD_SIZE = { // Размер доски.
-  COLUMN: 9,
-  LINE: 9,
-};
-// Параметры клетки.
-const SQUARE_SIZE = { // Размер клетки.
-  WIDTH: 50,
-  HEIGHT: 50,
-};
-const SQUARE_COLOR = { // Цвета клеток.
-  FIRST: `rgb(234,206,166)`,
-  SECOND: `rgb(134,100,61)`,
-};
+// //------------------------------------------------- Переменные <-ctxB->
+// // Параметры доски.
+// const BOARD_SIZE = { // Размер доски.
+//   COLUMN: 9,
+//   LINE: 9,
+// };
+// // Параметры клетки.
+// const SQUARE_SIZE = { // Размер клетки.
+//   WIDTH: 50,
+//   HEIGHT: 50,
+// };
+// const SQUARE_COLOR = { // Цвета клеток.
+//   FIRST: `rgb(234,206,166)`,
+//   SECOND: `rgb(134,100,61)`,
+// };
 
-//------------------------------------------------- Переменные <-ctxC->
-// Параметры шашки.
-const CHECKERS_LINE = 3; // Сколько рядов шашек будет у каждого игрока.
-const CHECKER_SIZE = { // Размеры шашки.
-  RADIUS: 20,
-}
-const CHECKER_COLOR = { // Цвета шашок.
-  FIRST_PLAYER: `white`,
-  SECOND_PLAYER: `black`,
-};
-const CHECKER_POSITION = { // Изначальные кординаты шашек для обоих игроков.
-  FIRST_PLAYER: {
-    X: SQUARE_SIZE.WIDTH / 2,
-    Y: SQUARE_SIZE.HEIGHT / 2,
-  },
-  SECOND_PLAYER: {
-    X: SQUARE_SIZE.WIDTH / 2,
-    Y: (SQUARE_SIZE.HEIGHT * BOARD_SIZE.LINE) - (SQUARE_SIZE.HEIGHT * CHECKERS_LINE) + (SQUARE_SIZE.HEIGHT / 2),
-  },
-};
-const OBJECTS = { // Список всех объектов для отрисовки
-  CHECKERS: [], // Список всех шашек
-  SELECTED: null,
-};
+// //------------------------------------------------- Переменные <-ctxC->
+// // Параметры шашки.
+// const CHECKERS_LINE = 3; // Сколько рядов шашек будет у каждого игрока.
+// const CHECKER_SIZE = { // Размеры шашки.
+//   RADIUS: 20,
+// }
+// const CHECKER_COLOR = { // Цвета шашок.
+//   FIRST_PLAYER: `white`,
+//   SECOND_PLAYER: `black`,
+// };
+// const CHECKER_POSITION = { // Изначальные кординаты шашек для обоих игроков.
+//   FIRST_PLAYER: {
+//     X: SQUARE_SIZE.WIDTH / 2,
+//     Y: SQUARE_SIZE.HEIGHT / 2,
+//   },
+//   SECOND_PLAYER: {
+//     X: SQUARE_SIZE.WIDTH / 2,
+//     Y: (SQUARE_SIZE.HEIGHT * BOARD_SIZE.LINE) - (SQUARE_SIZE.HEIGHT * CHECKERS_LINE) + (SQUARE_SIZE.HEIGHT / 2),
+//   },
+// };
+// const OBJECTS = { // Список всех объектов для отрисовки
+//   CHECKERS: [], // Список всех шашек
+//   SELECTED: null,
+// };
 
 //------------------------------------------------- Логика <-ctxB->
 // Рабочие переменные:

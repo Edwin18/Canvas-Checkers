@@ -1,4 +1,6 @@
-class Board {
+import {BOARD_SIZE, SQUARE_SIZE, SQUARE_COLOR} from '../const';
+
+class MainBoard {
   private board: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private colorTriger: boolean;
@@ -17,7 +19,7 @@ class Board {
     for (let i = 0; i < BOARD_SIZE.LINE; i++) { // итерируемся по строкам
       for (let k = 0; k < BOARD_SIZE.COLUMN; k++) { // итерируемся по столбцам
         this.renderSquare();
-        this.cordinateX = this.cordinateX + SQUARE_SIZE.WIDTH; // двигаемся по строке вправо
+      	this.cordinateX = this.cordinateX + SQUARE_SIZE.WIDTH; // двигаемся по строке вправо
       }
       this.cordinateY = this.cordinateY + SQUARE_SIZE.HEIGHT; // переходим на следующую строку
       this.cordinateX = 0; // начинаем с начала строки
@@ -41,4 +43,4 @@ class Board {
   }
 }
 
-export default Board;
+export default MainBoard;
