@@ -20,20 +20,20 @@ export const CHECKER_RADIUS = 20; // Радиус шашки.
 
 export const CHECKERS_LINE = 3; // Сколько рядов шашек будет у каждого игрока.
 export const CHECKER_COLOR = { // Цвета шашок.
-  FIRST_PLAYER: `white`,
-  SECOND_PLAYER: `black`,
+	FIRST_PLAYER: `white`,
+	SECOND_PLAYER: `black`,
 };
 export const CHECKER_POSITION = { // Изначальные кординаты шашек для обоих игроков.
-  FIRST_PLAYER: {
-    X: SQUARE_SIZE.WIDTH / 2,
-    Y: SQUARE_SIZE.HEIGHT / 2,
-  },
-  SECOND_PLAYER: {
-    X: SQUARE_SIZE.WIDTH / 2,
-    Y: (SQUARE_SIZE.HEIGHT * BOARD_SIZE.LINE) - (SQUARE_SIZE.HEIGHT * CHECKERS_LINE) + (SQUARE_SIZE.HEIGHT / 2),
-  },
+	FIRST_PLAYER: {
+		X: SQUARE_SIZE.WIDTH / 2,
+		Y: SQUARE_SIZE.HEIGHT / 2,
+	},
+	SECOND_PLAYER: {
+		X: SQUARE_SIZE.WIDTH / 2,
+		Y: (SQUARE_SIZE.HEIGHT * BOARD_SIZE.LINE) - (SQUARE_SIZE.HEIGHT * CHECKERS_LINE) + (SQUARE_SIZE.HEIGHT / 2),
+	},
 };
 export const OBJECTS = { // Список всех объектов для отрисовки
-  CHECKERS: [], // Список всех шашек
-  SELECTED: null,
+	CHECKERS: [], // Список всех шашек
+	SELECTED: null,
 };
