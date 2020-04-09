@@ -1,4 +1,4 @@
-//------------------------------------------------- Переменные Board
+//------------------------------------------------- Переменные MainBoard
 // Параметры доски.
 export const BOARD_SIZE = { // Размер доски.
   COLUMN: 9,
@@ -17,6 +17,10 @@ export const SQUARE_COLOR = { // Цвета клеток.
 //------------------------------------------------- Переменные Checker
 // Параметры шашки.
 export const CHECKER_RADIUS = 20; // Радиус шашки.
+export const CHECKER_SIZE = {
+  WIDTH: 40,
+  HEIGHT: 40,
+};
 
 export const CHECKERS_LINE = 3; // Сколько рядов шашек будет у каждого игрока.
 export const CHECKER_COLOR = { // Цвета шашок.
@@ -32,8 +36,4 @@ export const CHECKER_POSITION = { // Изначальные кординаты �
     X: SQUARE_SIZE.WIDTH / 2,
     Y: (SQUARE_SIZE.HEIGHT * BOARD_SIZE.LINE) - (SQUARE_SIZE.HEIGHT * CHECKERS_LINE) + (SQUARE_SIZE.HEIGHT / 2),
   },
-};
-export const OBJECTS = { // Список всех объектов для отрисовки
-  CHECKERS: [], // Список всех шашек
-  SELECTED: null,
 };

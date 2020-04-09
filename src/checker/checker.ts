@@ -46,7 +46,10 @@ class Checker {
   }
 
   public getPosition() { // Получаем кординаты шашки.
-    return this.position;
+    return {
+      x: this.position.x - CHECKER_RADIUS,
+      y: this.position.y - CHECKER_RADIUS,
+    };
   }
 
   public getWays() { // Получаем пути шашки.

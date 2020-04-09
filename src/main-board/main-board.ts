@@ -19,7 +19,7 @@ class MainBoard {
     this.cordinateY = 0; // Изначальне кординаты
   }
 
-  public renderSquares(): void { // Рендер всех клеток.  
+  public render(): void { // Рендер всех клеток.  
     for (let i = 0; i < BOARD_SIZE.LINE; i++) { // итерируемся по строкам
       for (let k = 0; k < BOARD_SIZE.COLUMN; k++) { // итерируемся по столбцам
         this.renderSquare();
