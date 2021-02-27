@@ -4,7 +4,7 @@ import {TWays} from '../types';
 import {
   BOARD_SIZE,
   SQUARE_SIZE,
-  CHECKERSS_LINE,
+  CHECKERS_LINE,
   CHECKERS_POSITION,
   CHECKERS_SIZE,
 } from '../const';
@@ -18,7 +18,9 @@ class CheckersBoard {
   private firstPlayerSvg: SVGImageElement;
   private secondPlayerSvg: SVGImageElement;
   private ways: Array<TWays>|null;
-  private allChacker: Array<Checkers>
+  private allChecker: Array<Checkers>
+  private move: boolean;
+  private target: Checkers|null;
 
   constructor() {
     this.board = document.querySelector(`#checkers`);
@@ -29,8 +31,11 @@ class CheckersBoard {
 
     this.firstPlayer = this.generateFirstPlayer();
     this.secondPlayer = this.generateSecondPlayer();
-    this.allChacker = [...this.firstPlayer, ...this.secondPlayer];
+    this.allChecker = [...this.firstPlayer, ...this.secondPlayer];
     this.ways = null;
+
+    this.move = false; // Тригер на ход шашки.
+    this.target = null; // Шашка по которой был клик.
   }
 
   public render(): void {
@@ -44,11 +49,26 @@ class CheckersBoard {
       const cords = windowToCanvas(this.board, evt.clientX, evt.clientY);
       const target = this.checkClick(cords.x, cords.y);
 
-      if (target) {
-        const ways = new Ways(target, this.firstPlayer, this.secondPlayer);
-        this.ways = ways.getWays();
+      if (this.move) {
+        const way = this.checkWayClick(cords.x, cords.y);
+
+        if (way) {
+          this.target.changePosition(way.x + SQUARE_SIZE.WIDTH / 2, way.y + SQUARE_SIZE.HEIGHT / 2);
+          this.ways = null;
+          this.target = null;
+          this.move = false;
+        } else {
+          this.ways = null;
+          this.target = null;
+          this.move = false;
+        }
       } else {
-        this.ways = null;
+        if (target) {
+          const ways = new Ways(target, this.firstPlayer, this.secondPlayer);
+          this.ways = ways.getWays();
+          this.target = target;
+          this.move = true;
+        }
       }
 
       this.render();
@@ -56,12 +76,16 @@ class CheckersBoard {
   }
 
   private checkClick(x: number, y: number): Checkers {
-    return this.allChacker.find((checkers) => (checkers.check(x, y)));
+    return this.allChecker.find((checkers) => (checkers.check(x, y)));
+  }
+
+  private checkWayClick(x: number, y: number): TWays {
+    return this.ways.find((way) => ((way.round.minX <= x) && (x <= way.round.maxX) && (way.round.minY <= y) && (y <= way.round.maxY)));
   }
 
   private renderCheckers(): void {
-    this.allChacker.forEach((checkers) => {
-      const cords = checkers.getPositionForRender();
+    this.allChecker.forEach((checkers) => {
+      const cords = checkers.geTPositionForRender();
       this.ctx.drawImage(checkers.svg, cords.x, cords.y, CHECKERS_SIZE.WIDTH, CHECKERS_SIZE.HEIGHT);
     });
   }
@@ -83,36 +107,36 @@ class CheckersBoard {
   }
 
   private generatePlayer(startX: number, startY: number, svg: SVGImageElement): Array<Checkers> {
-    let cordinateX = startX;
-    let cordinateY = startY;
+    let coordinateX = startX;
+    let coordinateY = startY;
     let stepColumn = true; // шаг по столбцу, что бы шашки были через одну
     let stepLine = false; // шаг строк, что бы шашки были через одну)
     const player = [];
 
-    for (let i = 1; i <= CHECKERSS_LINE; i++) { // итерируемся по строкам
+    for (let i = 1; i <= CHECKERS_LINE; i++) { // итерируемся по строкам
       for (let k = 1; k <= BOARD_SIZE.COLUMN; k++) { // итерируемся по столбцам
         if (stepColumn) { // если true рендерим шашку, если false пропускаем клетку
           if (stepLine) { // если true начинаем рендерить шашки с 1-й клетки, если flase переходим к 2-й клетке
-            cordinateX = startX; // задаем кординаты 1-й клетки
+            coordinateX = startX; // задаем кординаты 1-й клетки
             stepLine = false; // задаем false что бы не зациклить рендер на 1-й клетке
           } else {
-            cordinateX = cordinateX + SQUARE_SIZE.WIDTH; // переходим к 2-й клетке
+            coordinateX = coordinateX + SQUARE_SIZE.WIDTH; // переходим к 2-й клетке
           }
           player.push(
-            new Checkers(cordinateX, cordinateY, svg) // Создаем экземпляр класса Checkers и пушим в массив
+            new Checkers(coordinateX, coordinateY, svg) // Создаем экземпляр класса Checkers и пушим в массив
           );
 
           stepColumn = false; // задаем false что бы пропустить 1 клетку
         } else {
-          cordinateX = cordinateX + SQUARE_SIZE.WIDTH; // пропускаем клетку
+          coordinateX = coordinateX + SQUARE_SIZE.WIDTH; // пропускаем клетку
           stepColumn = true; // задаем true что бы не пропустить клетку
         }
       }
 
       stepLine = i % 2 === 0 ? false : true; // вычесляем четность строки, если нечетное то рендер будет с 2-й клетки, если четное то с 1-й
       stepColumn = true; // задаем true, так как переходим на новую строку и нужно обнулить логику вычеслений клеток
-      cordinateX = startX; // задаем кординаты 1-й клетки
-      cordinateY = cordinateY + SQUARE_SIZE.HEIGHT; // переходим на следующую строку
+      coordinateX = startX; // задаем кординаты 1-й клетки
+      coordinateY = coordinateY + SQUARE_SIZE.HEIGHT; // переходим на следующую строку
     }
 
     return player;

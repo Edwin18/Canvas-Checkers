@@ -1,9 +1,9 @@
-import {Tposition} from '../types';
+import {TPosition} from '../types';
 import {CHECKERS_RADIUS} from '../const';
 
 class Checkers {
   public svg: SVGImageElement;
-  private position: Tposition;
+  private position: TPosition;
   private round: {
     minX: number,
     maxX: number,
@@ -25,14 +25,14 @@ class Checkers {
     };
   }
 
-  public getPositionForRender(): Tposition { // Получаем кординаты шашки.
+  public geTPositionForRender(): TPosition { // Получаем кординаты шашки.
     return {
       x: this.position.x - CHECKERS_RADIUS,
       y: this.position.y - CHECKERS_RADIUS,
     };
   }
 
-  public getPositionForWays(): Tposition { // Получаем кординаты шашки.
+  public geTPositionForWays(): TPosition { // Получаем кординаты шашки.
     return {
       x: this.position.x,
       y: this.position.y,

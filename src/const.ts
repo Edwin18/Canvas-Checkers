@@ -22,7 +22,7 @@ export const CHECKERS_SIZE = {
   HEIGHT: 40,
 };
 
-export const CHECKERSS_LINE = 3; // Сколько рядов шашек будет у каждого игрока.
+export const CHECKERS_LINE = 3; // Сколько рядов шашек будет у каждого игрока.
 export const CHECKERS_COLOR = { // Цвета шашок.
   FIRST_PLAYER: `white`,
   SECOND_PLAYER: `black`,
@@ -34,6 +34,6 @@ export const CHECKERS_POSITION = { // Изначальные кординаты 
   },
   SECOND_PLAYER: {
     X: SQUARE_SIZE.WIDTH / 2,
-    Y: (SQUARE_SIZE.HEIGHT * BOARD_SIZE.LINE) - (SQUARE_SIZE.HEIGHT * CHECKERSS_LINE) + (SQUARE_SIZE.HEIGHT / 2),
+    Y: (SQUARE_SIZE.HEIGHT * BOARD_SIZE.LINE) - (SQUARE_SIZE.HEIGHT * CHECKERS_LINE) + (SQUARE_SIZE.HEIGHT / 2),
   },
 };
